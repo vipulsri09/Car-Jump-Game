@@ -1,0 +1,108 @@
+<html>
+    <head>
+        <title>JS ex</title>
+        <style>
+            body{
+                margin: 0;
+                overflow: hidden;
+            }
+            div{
+                height: 400px;
+                padding: 10px;
+                padding-right: 60px;
+                /* background-color: antiquewhite; */
+                background-image:linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)) , url("bg.avif.jpg");
+                background-size: cover;
+                background-position: bottom;
+                text-align: center;
+            }
+            #car{
+                float: left;
+                height: 100px;
+                margin-top: 220px;
+                position: relative;
+            }
+            #tree{
+                height: 150px;
+                margin-top: 150px;
+                transition: 1s;
+            }
+            button{
+                margin: 20px 10px;
+            }
+        </style>
+    </head>
+    <body onkeypress="f()">
+        <h1>Car Move Project:</h1>
+        <div>
+            <img id="car" src="car.png" alt="">
+            <img id="tree" src="tree.png" alt="">
+        </div>
+        <button onclick="f1()">Forward</button>
+        <button onclick="f3()">Stop</button>
+        <button onclick="f4()">Reset</button>
+        <button onclick="f5()">Play Music</button>
+        <button onclick="f6()">Pause Music</button>
+    </body>
+    <script>
+        var car=document.getElementById("car");
+        var tree=document.getElementById("tree");
+        var x=0,y=0;
+        var i;
+        var w=window.innerWidth;
+        var c=w/2 -35;
+        var a = new Audio("krishna flute.mp3");
+        function f1(){
+            clearInterval(i);
+            i=setInterval(function(){
+                
+                if(x<=w){
+                    x++;
+                    
+                }else{
+                    x=-150;
+                }
+                car.style.left=x+"px";
+
+               
+            },1);
+        }
+        function f3(){
+            clearInterval(i);
+        }
+        function f4(){
+            clearInterval(i);
+            x=0;
+            car.style.left=x+"px";
+            car.src="car.png";
+            tree.style.transform="translate(0px,0px) rotate(0deg)";
+        }
+        function f5(){
+            a.play();
+        }
+        function f6(){
+            a.pause();
+        }
+        var j;
+        function f(){
+            //on key press
+            if(x>=c-200 && x<=c){
+                y=0;
+                var flag=true;
+                j=setInterval(function(){
+                    if(y<200 && flag==true){
+                        y++;
+                    }else if(y>0){
+                        flag=false;
+                        y--;
+                    }else{
+                        clearInterval(j);
+                    }
+                    car.style.bottom= y +"px";
+                },1);
+            }else{
+                alert("Game over!");
+            }
+        }
+    </script>
+</html>
